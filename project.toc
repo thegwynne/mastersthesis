@@ -1,0 +1,40 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}Context and Motivation}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Prerequisite Knowledge and Core Texts}{3}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Project Overview}{4}{subsection.1.3}
+\contentsline {section}{\numberline {2}Preliminaries}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}The Classical Non Relativistic String}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Lorentz Covariance}{6}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Relativistic Point Particle}{7}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}Relativistic Action}{7}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.2}Equations of Motion}{8}{subsubsection.2.3.2}
+\contentsline {subsection}{\numberline {2.4}Relativistic Strings}{9}{subsection.2.4}
+\contentsline {subsubsection}{\numberline {2.4.1}Spacial Surfaces}{9}{subsubsection.2.4.1}
+\contentsline {subsubsection}{\numberline {2.4.2}Spacetime Surfaces}{11}{subsubsection.2.4.2}
+\contentsline {section}{\numberline {3}Equations of Motion}{13}{section.3}
+\contentsline {subsection}{\numberline {3.1}The Static Gauge}{14}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Transverse Velocity Action}{14}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}String Momentum}{16}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Lorentz Charges}{17}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Gauge Fixing}{18}{subsection.3.5}
+\contentsline {subsection}{\numberline {3.6}Wave Equation General Solution}{20}{subsection.3.6}
+\contentsline {subsection}{\numberline {3.7}The Light Cone Gauge}{21}{subsection.3.7}
+\contentsline {subsection}{\numberline {3.8}Light-Cone Equations of Motion}{22}{subsection.3.8}
+\contentsline {section}{\numberline {4}Quantizing the Relativistic Point Particle}{24}{section.4}
+\contentsline {subsection}{\numberline {4.1}Point Particle Equations of Motion in the Light-Cone Gauge}{24}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Point Particle Quantum Operators}{25}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Point Particle Hamiltonian}{26}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Point Particle States and the Schr\"{o}dinger Equation}{27}{subsection.4.4}
+\contentsline {section}{\numberline {5}Quantum Relativistic Strings}{28}{section.5}
+\contentsline {subsection}{\numberline {5.1}String Quantum Operators}{28}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}String Hamiltonian}{29}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}$\mathaccentV {hat}05E{\alpha }_n^i$ as Operators}{30}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Annihilation and Creation Operators}{32}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}Transverse Virasoro Operators, and the Virasoro Algebra}{33}{subsection.5.5}
+\contentsline {subsection}{\numberline {5.6}The Dimensionality of Spacetime in Bosonic String Theory}{38}{subsection.5.6}
+\contentsline {section}{\numberline {6}Loose Ends and Oddities}{41}{section.6}
+\contentsline {subsection}{\numberline {6.1}A Brief Excursion into Number Theory}{41}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}The String Mass and Some Basic String States}{42}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Hidden Dimensions}{43}{subsection.6.3}
+\contentsline {section}{\numberline {7}Conclusion}{45}{section.7}
+\contentsline {section}{\numberline {8}Acknowledgements}{45}{section.8}

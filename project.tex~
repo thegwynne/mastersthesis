@@ -1,0 +1,814 @@
+ \documentclass[a4paper,12pt]{article}
+
+\usepackage{amsmath,amssymb,graphicx,hyperref,parskip,braket}
+\numberwithin{equation}{section}
+\usepackage[cm]{fullpage}
+\begin{document}
+
+
+\title{An Introduction to the Bosonic String}
+
+\author{Matthew Gwynne}
+
+\maketitle
+\tableofcontents
+\begin{abstract}
+\end{abstract}
+
+\section{Introduction}
+\section{The Classical String}
+\subsection{Non Relativistic String}
+To begin with we reduce the problem as much as possible, and determine the dynamics of a classical, non-relativistic string. To do this, we need to construct the Lagrangian, and hence the kinetic and potential energies. Consider a string with mass per unit length $\rho$ and tension $T_0$ in two-dimensions $(x,y)$, stretched between the points $(0,0)$ and $(0,l)$. With the two endpoints fixed, we can say that the x direction is longitudinal, and the y direction is transverse. The kinetic energy is simple, for each infinitesimal segment $dx$ (which has mass $\rho dx$), its velocity is $\partial y/ \partial t$, so summing over all such segments gives 
+\begin{equation}\label{nrkinetic}
+T =  \int_0^l \frac{1}{2}  \rho  \left( \frac{\partial y}{\partial t} \right)^2 dx.
+\end{equation}
+The potential energy comes from the work done to stretch each infinitesimal segment. Consider one segment which, when stationary, stretches between $(x,0)$ and $(x + dx, 0)$. If the right-hand endpoint of this string is moved from $(x+dx, 0)$ to $(x+dx, dy)$ then the change in length of the segment, $\Delta$, is given by 
+\begin{equation}
+\Delta = \sqrt{(dx)^2 + (dy)^2} - dx.
+\end{equation} 
+We now assume that the oscillations are small, and so can use the first two terms of the expansion of the square root, so
+\begin{equation}
+\Delta \approx \frac{1}{2}dx \left( \frac{\partial y}{\partial x} \right)^2.
+\end{equation}
+Now, by Hooke's law, the work done for each segment is $T_0 \Delta$, so the total potential energy of the string is 
+\begin{equation}
+V = \int_0^l \frac{1}{2} T_0 \left( \frac{\partial y}{\partial x} \right) ^2 dx.
+\end{equation} 
+Thus, the Lagrangian, $T - V$ is given by 
+\begin{equation}
+L = \int_0^l \frac{1}{2}\left( \rho  \left( \frac{\partial y}{\partial t} \right)^2 -  T_0 \left( \frac{\partial y}{\partial x} \right) ^2 \right) dx.
+\end{equation}
+For such a string moving from time $t_i$ to time $t_f$, the action is therefore given by 
+\begin{equation}
+S = \int_{t_i}^{t_f} \left[ \int_0^a \frac{1}{2}  \left( \rho  \left( \frac{\partial y}{\partial t} \right)^2 -   T_0 \left( \frac{\partial y}{\partial x} \right) ^2 \right) dx \right] dt.
+\end{equation}
+Varying this action gives 
+\begin{equation}
+\delta S = \int_0^l \left[ \rho \frac{\partial y}{\partial t} \delta y\right]_{t_i}^{t_f} dx -  \int_{t_i}^{t_f} \left[T_0\frac{\partial y}{\partial x} \delta y \right]_0^l dt - \int_{t_i}^{t_f} \left( \int_0^l \left( \rho \frac{\partial ^2 y}{\partial t^2} -T_0 \frac{\partial ^2 y}{\partial x^2}\right)\delta y dx \right) dt
+\end{equation}
+In order to satisfy $\delta S = 0$, all of the terms must vanish separately. The first of these is effectively satisfied by specifying the initial and final configurations of the string, so is of little interest. 
+The third term gives us our string equations of motion, 
+\begin{equation}\label{eom2d}
+\rho \frac{\partial ^2y}{\partial t^2} = T_0 \frac{\partial ^2 y}{\partial x^2}.
+\end{equation}
+The second term can be expanded out to 
+\begin{equation}
+\int_{t_i}^{t_f}\left(T_o \frac{\partial y}{\partial x}(t,l)\delta y(t,l) - T_0 \frac{\partial y}{\partial x}(t,0)\delta y(t,0)\right) dt = 0,
+\end{equation}
+which makes it clear that it concerns the spatial boundary conditions (the ends of the string). Clearly, the integrand vanishes if $\frac{\partial y}{\partial x} =0$ at both end points. Slightly less clearly, the equality also holds if $\frac{\partial x}{\partial t} =0$ at both end points. These correspond to Neumann or Dirichlet boundary conditions respectively, and to decide which one is appropriate, we examine the total momentum. 
+\begin{equation}
+p = \int_0^l \rho \frac{\partial y}{\partial t} dx.
+\end{equation}
+Conservation of this momentum would be given by
+\begin{equation}
+\frac{dp}{dt} = 0 = \int_0^l \rho \frac{\partial ^2y}{\partial t^2} dx = \int_0^l T_0 \frac{\partial^2 y}{\partial x^2} dx,
+\end{equation}
+where the final equality is due to equation \ref{eom2d}. The integral sign then cancels out one of the derivatives, and the tension is strictly positive, so we have  
+\begin{equation}
+\left[ \frac{\partial y}{\partial x} \right]_0^l = 0.
+\end{equation}
+Note that this means momentum is conserved with \emph{Neumann} boundary conditions. This does not necessarily mean that Dirichlet boundary conditions are never valid, just that they don't necessarily conserve momentum FIND SOME REFERENCE FOR D BRANES. For the purposes of this project, we will always assume Neumann boundary conditions.
+
+Now this gives string equations of motion and boundary conditions, but the action is non-relativistic, and we must now seek a Lorentz covariant equivalent. First, however, a brief introduction to Lorentz covariance.
+\section{Lorentz Covariance}
+The core principle that led to the discovery of special relativity was the idea that the speed of light is constant, and will take the same value regardless of the motion of the observer. By making this assumption many things that we think of as being fixed break down somewhat. For one thing, the distance between two objects becomes ill-defined; to an inertial observer, a ruler would appear shorter than its rest length if it was travelling sufficiently quickly.
+
+The 'replacement' for three-dimensional distance is four-dimensional spacetime distance. Instead of considering a point in space defined by its 3 spacial coordinates, we consider an \emph{event} in spacetime defined by 3 spacial coordinates ($x^1, x^2, x^3$) , and one time coordinate ($x^0$). Then, according to special relativity, the spacetime interval between two events, defined to be 
+\begin{equation}
+\Delta s^2 = (\Delta x^0)^2 - (\Delta x^1)^2-(\Delta x^2)^2-(\Delta x^3)^2
+\end{equation}
+is the same for all inertial observers. If this number is positive, the the two events are said to be timelike separated. For example if you consider the trajectory of a particle moving in space, all points along that curve are timelike separated, as massive particles can't move faster than light. This in fact is the simplest way to see that the Lagrangian in the previous section is not relativistic, as it did not have any issue with faster than light travel.
+
+Notice that in the definition of the spacetime interval the time coordinate has the opposite sign to the space coordinates. This signature is called the Minkowski metric.
+
+The standard convention for writing down expressions involving spacetime coordinates allows for a great deal of simplification of notation. The coordinates of the event x in space time are denoted by $x^\mu$ \footnote{In general greek characters are used to denote spacetime indices, while latin characters are used when only the spacial coordinates are included}. In this convention, the Minkowski metric can be expressed as a matrix, 
+\begin{equation}
+\eta _{\mu \nu} =  \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & -1 & 0 & 0 \\ 0 & 0 & -1 & 0 \\ 0 & 0 & 0 & -1 \end{pmatrix} 
+\end{equation}.
+
+In our new convenction, an expression containing the same index twice in one term implicitly sums over all possible values of that index. So an expression like $x^\mu x_\mu$ would resolve to a scalar quantity. Combining this idea with the Minkowski metric allows the introduction of a vector with lowered indices. The term $x_\mu$, which is defined to be $\eta_{\mu \nu} x^\nu$, has the same values as $x^\mu$, but with opposite signs on the spacial coordinates. This allows the space time interval to be expressed much more compactly, as with this convention
+\begin{equation}
+\Delta s ^2  = \eta_{\mu \nu} x^\nu x^\mu.
+\end{equation}
+Now, the feature that is significant here is that the expression has no free indices; all indices are summed over. This means that it is unchanged by Lorentz transformations and is said to be Lorentz covariant. This is the property that we seek for our relativistic action. An action composed of Lorentz vectors with no free indices will be naturally Lorentz covariant.
+
+Before considering a relativistic string however, it is instructive to see how this process works for a relativistic point particle.
+
+\section{Relativistic Point Particle}\label{sectionpoint}
+\subsection{Relativistic Action}
+As a particle moves in space, it traces out a curve in spacetime, which we shall call $C$. The action should be a functional of properties of this curve. In order to find an appropriate action, we need properties of the particle that all observers will agree on. The most natural property would be the proper time elapsed, i.e the time difference in the rest frame of the particle. Infinitessimally, 
+\begin{equation}
+ds^2 = c^2 dt^2 - (dx^1)^2 - (dx^2)^2 - (dx^3)^2, 
+\end{equation}
+and the proper time $\tau$ is equal to $ds/c$. 
+This doesnt however have the correct dimensions. The action is a Lagrangian (units of energy, or $M L^2/T^2$) integrated over time, so has overall units of $M L^2/T$. If we integrate the proper time over the world line, the units will just be $T$, so we need a correcting mass and velocity squared. For the mass we can use the rest mass of the particle (call it $m$), but the only appropriate velocity is the speed of light $c$. The velocity of the particle is reference frame dependent, so would not give a covariant action. 
+
+This action turns out to be correct (apart from a minus sign), so we have
+\begin{equation}\label{pointaction}
+S = -\int_C mc\,\, ds 
+\end{equation}
+To put this action in some kind of context it is helpful to consider it in some other Lorentz frame. In that frame, the proper time is related to the reference time by 
+\begin{equation}
+ds = c \, \, dt\sqrt{1-\frac{v^2}{c^2}},
+\end{equation}
+so the action becomes
+\begin{equation}
+S = -mc^2 \int_{t_i}^{t_f} \sqrt{1-\frac{v^2}{c^2}} dt,
+\end{equation}
+where $t_i$ and $t_f$ are the initial and final times in the observers frame of reference. This gives us a Lagrangian of
+\begin{equation}\label{pointlagrangian}
+L = -mc^2\sqrt{1-\frac{v^2}{c^2}}.
+\end{equation}
+
+Notice that with low speeds, using the binomial expansion of the square root and discarding any times higher than $2^{nd}$ order in the velocity, we recover the non relativistic lagrangian, 
+\begin{equation}
+L \approx - mc^2 + \frac{1}{2} m v^2.
+\end{equation} 
+This should be encouraging that the action is doing what it is supposed to do. 
+\subsection{Equations of Motion}
+We now proceed as normal, and vary the action to find the equations of motion. In order to find the correct variation of $ds$, we use the simpler to work with variation of $ds^2$.
+
+Consider the worldline of the particle to be parametrized by proper time, which we may freely do due to reparametrization invariance. We can write
+\begin{equation}
+ds^2 = -\eta_{\mu \nu} dx^\mu dx^\nu = -\eta_{\mu \nu} \frac{dx^\mu}{d\tau}\frac{dx^\nu}{d\tau}(d\tau)^2.
+\end{equation}
+Varying both sides of this expression gives
+\begin{equation}
+2ds\delta(ds)=2\eta_{\mu \nu} \delta\left(\frac{dx^\mu}{d\tau}\right)\frac{dx^\nu}{d\tau}(d\tau)^2,
+\end{equation}
+where both sides use a simple application of the chain rule. Rearranging to make $\delta(ds)$ the subject, and simplifying gives
+\begin{equation}
+\delta(ds) = \eta_{\mu \nu} \frac{d(\delta x^\mu)}{d\tau}\frac{dx^\nu}{ds}\,d\tau.
+\end{equation}
+Using this and equation \ref{pointaction} we have
+\begin{equation}
+\delta S = -mc\int_C \frac{d(\delta x^\mu)}{d\tau}\frac{dx_\mu}{ds}\,d\tau,
+\end{equation}
+where the $\eta_{\mu \nu}$ has been used to lower the index on the second component of the integrand.
+Currently, there are still derivatives acting on the variation of the coordinate, so we use the product rule to separate it into a $\tau$ derivative of the entire integrand, and a term where $\delta(x^\mu)$ appears without any derivatives.
+\begin{equation}\label{pointseparated}
+\delta S = -mc\int_C \frac{d}{d\tau}\left(\delta x^\mu \frac{dx_\mu}{ds}\right)\,d\tau + mc\int_C\delta x^\mu \frac{d}{d\tau}\left(\frac{dx_\mu}{ds}\right) \, d\tau
+\end{equation}
+The first term collapses by the fundamental theorem of calculus into the values of $\delta x^\mu \frac{dx_\mu}{ds}$ evaluated at the boundaries of $C$ (the initial and final values of $\tau$), and as such vanishes as these values can be fixed. Then, by setting $\delta S = 0$ the equations of motion are determined by whatever is left in the second term apart from the $\delta x^\mu$.
+\begin{equation}
+mc\frac{d}{d\tau}\left(\frac{dx_\mu}{ds}\right) = \frac{d}{d\tau}\left(mc\frac{dx_\mu}{d\tau}\right) = \frac{dp_\mu}{d\tau} = 0
+\end{equation}
+Thus our equations of motion are that each component of the momentum of the particle is conserved by its motion, and this statement is not frame dependent.
+\subsection{Action with a Non-Zero Potential}
+All of our considerations thus far have been for a free particle, but there are instructive points to be gained by considering a particle moving in the presence of a potential, for example a charged particle moving in an electric field.
+
+The field interacts with the particle along its worldline, so it makes sense to add a term to \ref{pointaction} representing this interaction. This term is required to be a product of Lorentz vectors with no free indices. The obvious Lorentz vector associated with an electric field is the gauge potential $A_\mu$ at the position of the particle. In relativistic electromagnetism, this interacts with the particle via its four-velocity, so the natural action (with unit correction) is
+\begin{equation}
+S = \int_C mc \,ds + \int_C\left( \frac{q}{c}A_\mu\frac{dx^\mu}{d\tau}\right)d\tau,
+\end{equation}
+and cancelling the $d\tau$s gives 
+\begin{equation}
+S = \int_C mc \,ds + \int_C \frac{q}{c} A_\mu dx^\mu.
+\end{equation}
+This process of constructing a Lorentz invariant action by using a field potential will provide guidance as to how to proceed for strings later.
+%\centering
+%\includegraphics[width=0.8\textwidth]{wiper.png}
+%\caption{Diagram illustrating the parameters introduced in \cite{wipers} to describe the screen and the wiper.%\label{wiperdiagram}}
+%\end{figure}
+\section{Relativistic Strings}
+When we were considering a relativistic particle, the goal was to try to find a Lorentz covariant action based on the particle's world line. Now that we are working with strings, the subset of spacetime swept out by the string is now a 2-dimensional sheet, but the goal of finding a Lorentz covariant action remains the same. 
+
+In the case of the point, the action turned out to be constructed most simply out of the proper time along the worldline, so the natural place to look is in some kind of 'proper area'. Differential geometry gives us the tools required to find the area of a surface. For ease of understanding we will first consider spatial surfaces in three dimensions.
+\subsection{Spacial Surfaces}
+A surface can at least locally be parametrized by two parameters (which we will call $\xi_1, \xi_2$). The set of parameters take values on the \emph{coordinate space}, and a set of functions which we cal $X^i$ provide an isomorphism between the coordinate space and the surface. We will call the space in which the surface lives the \emph{target space}. The $X^i$ are thus functions of $\xi_1$ and $\xi_2$.
+
+In general, an infinitessimal rectangular interval in the coordinate space will correspond to an infinitessimal trapezium in the target space. The area of a parallelogram spanned by two edges of length $a, b$ at an angle $\theta$ to each other is given by Area $ = a \,b \sin \theta$. If we call the vectors that span the area element in the target space $da$ and $db$, then
+\begin{equation}\label{edges}
+da^i = \frac{dX^i}{d\xi^1}d\xi^1, db^i \quad \frac{dX^i}{d\xi^2}d\xi^2.
+\end{equation}
+Using these, we can construct the area element $dA$ in the target space.
+\begin{eqnarray*}
+dA & = & |da||db|\sin\theta \\
+& = & |da||db|\sqrt{1-\cos^2\theta} \\
+& = & |da||db|\sqrt{1 - \left(\frac{da.db}{|da||db|}\right)^2} \\
+& = & \sqrt{|da|^2|db|^2 - (da.db)^2} \\
+& = & \sqrt{(da.da)(db.db) - (da.db)^2}
+\end{eqnarray}
+In the third line of this derivation we have used the following definition of the dot product of two vectors.
+\begin{equation}
+\mathbf{a}.\mathbf{b} = |\mathbf{a}||\mathbf{b}|\cos\theta.
+\end{equation}
+Using our definitions \ref{edges}, the area element can be expressed in terms of the parameters by 
+\begin{equation}\label{areaelement}
+dA = d\xi^1d\xi^2\sqrt{\left(\frac{dX^i}{d\xi^1}\frac{dX_i}{d\xi^1}\right)\left(\frac{dX^i}{d\xi^2}\frac{dX_i}{d\xi^2}\right) - \left(\frac{dX^i}{d\xi^1}\frac{dX_i}{d\xi^2}\right)^2},
+\end{equation} 
+and the total area is given by the integral of this quantity over the parameter boundaries.
+
+We want to demonstrate that this quantity is reparametrization invariant. For the point particle this was trivial; as there is only one coordinate along the string (say $\tau$), any reparametrization would be a function of the one coordinate, $\tilde{\tau}(\tau)$. This meant that the Jacobian and inverse Jacobian would immediately cancel.
+
+In this case however, we have to assume that the two coordinates would mix up, $\tilde{\xi^1}(\xi^1, \xi^2), \tilde{\xi^2}(\xi^1,\xi^2)$, so it is non trivial to demonstrate the reparametrization invariance. The simplest way is to construct the induced metric $g_{i j}$, defined by
+\begin{equation}
+g_{i j } = \frac{dX^k}{d\xi^i}\frac{dX_k}{d\xi^j}.
+\end{equation}
+Notice that, considering this as a matrix, $det(g_{i j})$ is given by the expression under the square root in equation \ref{areaelement}. If we say $g = det(g_{i j})$, then we can write
+\begin{equation}\label{gaction}
+A = \int d\xi^1d\xi^2\sqrt{g}.
+\end{equation}
+Now, to demonstrate reparametrization invariance, we construct the spacial interval in terms of this new construction. Now, remembering that we are still working with all spatial coordinates, $ds^2 = dx^kdx_k$, and we can express $dx^k$ in terms of the differentials $d\xi^1, d\xi^2$ by
+\begin{equation}
+dx^k = \frac{dX^k}{d\xi^1}d\xi^1 + \frac{dX^k}{d\xi^2}d\xi^2 = \frac{dX^k}{d\xi^i}d\xi^i,
+\end{equation}
+where the index i takes the values $1, 2$.
+Using this, we can see 
+\begin{equation}
+ds^2 = \frac{dX^k}{d\xi^i}\frac{dX_k}{d\xi^j}d\xi^id\xi^j = g_{i j}d\xi^id\xi^j.
+\end{equation}
+Thus, if we have two different parametrizations $(\xi^1, \xi^2)$ and $(\tilde{\xi^1}, \tilde{\xi^2})$, with induced metrics $g_{i j}$ and $\tilde{g}_{i j}$ respectively, the invariance of the spacetime interval gives
+\begin{equation}
+g_{i j }\, d\xi^i d\xi^j = \tilde{g}_{k l}\, d\tilde{\xi}^k d\tilde{\xi}^l.
+\end{equation}
+We want to rearrange this into an expression for one of the metrics in terms of the differentials from each parametrization. We can do this using the chain rule, as
+\begin{equation}
+d\tilde{\xi}^i = \frac{\partial \tilde{\xi}^i}{\partial \xi^j}d\xi^j,
+\end{equation}
+and then the differentials cancel, leaving 
+\begin{equation}
+g_{i j} = \tilde{g}_{k l} \frac{\partial \tilde{\xi}^k}{\partial \xi^i}\frac{\partial \tilde{\xi}^l}{\partial \xi^j}
+\end{equation}
+
+THIS ISNT FINISHED, COME BACK TO IT AT SOME POINT.
+\subsection{Spacetime Surfaces}
+This has given us a functional, reparametrization invariant functional for the area of a surface in space, but for our strings the worldsheet is a surface in spacetime. In particular, at all points on the worldsheet, there must be at least one tangent vector pointing in a timelike direction (the worldline of 'one point\footnote{This is technically not a valid statement, as discussed in section \ref{sigmapar}, but does provide an outline for the reasoning}' on the string in an inertial frame), and at least one tangent vector pointing in a spacelike direction (the configuration of the string at a fixed point in time in an inertial frame). 
+
+By convention, we will use the names $\sigma$ and $\tau$ instead of $\xi^1$ and $\xi^2$. Thus, the worldsheet is now given by the set of functions $X^\mu(\tau, \sigma)$. The natural extension of the area functional is formed by simply adding the $X^0$ coordinate back into equation \ref{edges}.
+\begin{equation}
+da^\mu = \frac{dX^\mu}{d\tau}d\tau, \quad db^\mu = \frac{dX^\mu}{d\sigma}d\sigma.
+\end{equation}
+Using this to construct the area functional however takes a little bit more thought than in the spacial case. This is because the expression under the square root in equation \ref{areaelement} is not obviously positive in the spacetime case. In order to ensure it has a fixed sign, we use the fact that the tangent space of every point on the worldsheet is spanned by a spacelike and a timelike vector. To see this, consider the set of tangent vectors at a point given by parameters $\tau_0$, $\sigma_0$ (although the values of the coordinates are omitted for brevity), 
+\begin{equation}
+v^\mu(t) = \frac{\partial X ^ \mu}{\partial \tau} + t\frac{\partial X^\mu}{\partial \sigma},
+\end{equation}
+for $t \in (-\infty, \infty)$. This gives something approximating polar coordinates; as $t$ varies you get a sort of circle of vectors, and adding a scaling factor, this set would in fact span the tangent space. Now squaring vectors in this set gives
+\begin{equation}
+v^\mu(t) v_\mu  (t) = t^2\left(\frac{\partial X^\mu}{\partial \sigma}\frac{\partial X_\mu}{\partial \sigma}\right) + 2t\left(\frac{\partial X^\mu}{\partial\tau}\frac{\partial X_\mu}{\partial\sigma}\right) + \left(\frac{\partial X^\mu}{\partial \tau}\frac{\partial X_\mu}{\partial \tau}\right).
+\end{equation}
+If we require the tangent space to require both timelike and spacelike vectors, that means that this expression must be capable of people either positive or negative. This means the equation
+\begin{equation}
+v^\mu(t)v_\mu(t) = 0
+\end{equation}
+must have two real roots, so the discriminant, 
+\begin{equation}
+\left(\frac{\partial X^\mu}{\partial \tau}\frac{\partial X_\mu}{\partial \sigma}\right)^2 - \left(\frac{\partial X^\mu}{\partial \sigma}\frac{\partial X_\mu}{\partial \sigma}\right)\left(\frac{\partial X^\nu}{\partial \tau}\frac{\partial X_\nu}{\partial \tau}\right) > 0.
+\end{equation}
+
+Since this quantity is positive, we see that in order to construct an area functional, we must introduce a minus sign under the square root in equation \ref{areaelement}. This is constructed from Lorentz vectors, and inherits reparametrization invariance from the spatial version. All that remains to turn this into the correct action, is to introduce some dimensionful constants. We treat $\tau$ as having the dimension of time and $\sigma$ as having the dimension of distance. Then, since the area has dimension of distance$^2$, we can multiply by tension/velocity to achieve the desired units of $ML^2/T$. Thus, our relativistic string action is given by
+\begin{equation}
+S = - \frac{-T_0}{c} \int_{\tau_i}^{\tau_f}d\tau \int_{\sigma_i}^{\sigma_f} d\sigma \sqrt{\left(\frac{\partial X^\mu}{\partial \tau}\frac{\partial X_\mu}{\partial \sigma}\right)^2 - \left(\frac{\partial X^\mu}{\partial \sigma}\frac{\partial X_\mu}{\partial \sigma}\right)\left(\frac{\partial X^\nu}{\partial \tau}\frac{\partial X_\nu}{\partial \tau}\right)}.
+\end{equation}
+Then, this notation can be simplified, making use of 
+\begin{equation}
+\dot{X}^\mu =\frac{\partial X^\mu}{\partial \tau}, \quad X'^\mu = \frac{\partial X^\mu}{\partial \sigma},  
+\end{equation}
+to allow us to write
+\begin{equation}\label{contractedaction}
+S = \frac{- T_0}{c} \int_{\tau_i}^{\tau_f} d\tau \int_{\sigma_i}^{\sigma_f} d\sigma \sqrt{(\dot{X}.X')^2 - (\dot{X})^2(X')^2}.
+\end{equation}
+In order to get this action to look like equation \ref{gaction}, we define the induced metric on the target Minkowski space, 
+\begin{equation}
+\gamma_{\mu \nu} = \begin{pmatrix} 
+(\dot{X})^2 & \dot{X}.X' \\
+ \dot{X}.X' & (X')^2 \end{pmatrix}.
+\end{equation} 
+If we similarly use $\gamma = det(\gamma_{\mu \nu})$, we can rewrite the action as 
+\begin{equation}
+S = \frac{-T_0}{c}\int d\tau d\sigma \sqrt{-\gamma},
+\end{equation}
+where the integration is done over the boundary. Conventionally, the $\sigma$ parametrisation is chosen to be between $0$ and $\pi$ for open strings. This action is called the \emph{Nambu-Goto action}.
+\section{Equations of Motion}
+Deriving the string equations of motion from \ref{contractedaction} is relatively straightforward, and follows the standard classical mechanics procedure. The Lagrangian density is given by 
+\begin{equation}
+\mathcal{L}(\dot{X}, X') = \frac{-T_0}{c} \sqrt{(\dot{X}.X')^2 - (\dot{X})^2(X')^2},
+\end{equation}
+which allows us to write the variation 
+\begin{eqnarray*}
+\delta S & = & \int_{\tau_i}^{\tau_f} d\tau \int_0^\pi d\sigma \delta\left(\mathcal{L}(\dot{X}, X')\right) \\
+& = & \int_{\tau_i}^{\tau_f} d\tau \int_0^\pi d\sigma\left( \frac{\partial \mathcal{L}}{\partial \dot{X}^\mu}\frac{\partial (\delta X^\mu)}{\delta \tau} + \frac{\partial \mathcal{L}}{\partial \dot{X}^\mu}\frac{\partial (\delta X^\mu)}{\delta \sigma} \right)
+\end{eqnarray}
+The first half of each of these two terms can be calculated explicitly by a simple application of the chain rule, giving
+\begin{eqnarray}
+\frac{\partial \mathcal{L}}{\partial \dot{X}^\mu} & = & \frac{-T_0}{c}\left( \frac{(\dot{X}.X')X'_\mu - (X')^2\dot{X}_\mu}{\sqrt{(\dot{X}.X')^2 - (\dot{X})^2(X')^2}}\right)\label{taumomentum}, \\
+\frac{\partial \mathcal{L}}{\partial X'^\mu} & = & \frac{-T_0}{c}\left( \frac{(\dot{X}.X')\dot{X}_\mu - (X')^2X'_\mu}{\sqrt{(\dot{X}.X')^2 - (\dot{X})^2(X')^2}}}\right)\label{sigmamomentum} .
+\end{eqnarray}
+As in classical mechanics hese two quantities are momentum density currents for each of the two parameters, so we will refer to them as $\mathcal{P}^\tau_\mu$ and $\mathcal{P}^\sigma_\mu$ respectively. Now, following the pattern of the point particle, we want to split the integrand into total derivatives and boundary terms. In this case there are two parameters, so instead of two terms we have four.
+\begin{equation}
+\delta S = 0 = \int_{\tau_i}^{\tau_f} d\tau \int_0^\pi d\sigma \left[\frac{\partial(\delta X^\mu \mathcal{P_\mu^\tau})}{\partial \tau} + \frac{\partial (\delta X^\mu \mathcal{P}^\sigma_\mu)}{\partial \sigma}  - \delta X^\mu\frac{\partial \mathcal{P}_\mu^\tau}{\partial \tau} - \delta X^\mu\frac{\partial \mathcal{P}_\mu^\sigma}{\partial \sigma}\right]
+\end{equation}
+The first term is the equivalent of the first term in equation \ref{pointseparated}, and vanishes automatically for the same reason; we can simply specify the initial and final configurations of the string in order to make it vanish. We can group the third and fourth terms together due to their mutual factor of $\delta X^\mu$, and since it must vanish for all such variations we have that
+\begin{equation}\label{stringeom}
+\frac{\partial \mathcal{P}_\mu^\tau}{\partial \tau} + \frac{\partial \mathcal{P}_\mu^\sigma}{\partial \sigma} = 0,
+\end{equation}
+our equation of motion for a relativistic string. This expression for the equations of motion looks relatively simple until you recall the definitions of the momentum density currents. For now however, we must deal with the remaining boundary terms, corresponding to the string endpoints. \footnote{Or continuity conditions in the case of the closed string.} NEED TO TALK ABOUT BOUNDARY CONDITIONS, DECIDE WHETHER TO MENTION D-BRANES PROPERLY OR NOT
+\subsection{The Static Gauge}\label{staticgauge}
+An advantage of reparametrization invariance is that it allows us to freely choose a parametrization to work with, simplifying the manipulation required significantly. In this case, it isn't necessary to entirely fix the parametrisation; it suffices to specify the $\tau$ parametrisation. We choose to associate lines of constant $\tau$ to the time coordinate $X^0$ in some choice of Lorentz frame. The sigma parametrization is not specified except that it takes the values $0$ and $\pi$ at the string endpoints. This choice is called the \emph{static gauge}.
+
+In this gauge, the coordinates $X^\mu$ are slightly less free; the first coordinate naturally takes the value $ct$, and the remaining $d-1$ coordinates become a spacial vector. With this we obtain the expressions
+\begin{eqnarray}
+X^\mu(t,\sigma) & = & (ct, \mathbf{X}(t,\sigma)), \\
+\frac{\partial X^\mu}{\partial \sigma} & = & \left(0,\frac{\partial \mathbf{X}}{\partial\sigma}\right), \\
+\frac{\partial X^\mu}{\partial \tau} & = & \left(c, \frac{\partial \mathbf{X}}{\partial \tau}\right) .
+\end{eqnarray}
+We can also calculate the terms under the square root in the action in the static gauge. We obtain
+\begin{eqnarray}
+\dot{X}.X' & = & \frac{\partial \mathbf{X}}{\partial t}.\frac{\partial \mathbf{X}}{\partial \sigma}\label{foo1} \\
+(\dot{X})^2 & =& -c^2 + \left(\frac{\partial \mathbf{X}}{\partial t}\right)^2 \\
+(X')^2 & = & \left(\frac{\partial \mathbf{X}}{\partial \sigma}\right)^2\label{foo2}
+\end{eqnarray}
+\subsection{Transverse Velocity Action}
+In order to make the equations of motion easier to interpret, we can reexpress it in terms of the transverse velocity. The longitudinal velocity turns out not to be physically significant, due to the parametrisation independance of the worldsheet. In any Lorentz frame it is possible to find a snapshot of the string corresponding to a fixed value of $\tau$. However, if in that Lorentz frame you were to take two snapshots of the string with an infinitessimal time separation $dt$ there would be no way to say that one 'point' of the string at the first time corresponded to an equivalent 'point' on the string in the second snapshot. This is a fundamental property from reparametrization invariance, which means that any longitudinal motion could not be significant.
+
+The transverse velocity, however, is dynamically significant. The easiest way to visualise the transverse velocity is to consider the \emph{spatial} surface swept out by the string moving through space. In effect, this is the surface created by taking snapshots of the string at all times (in your frame), and sticking them all together. If you do this, the transverse velocity at a point on the string is the vector orthogonal to the string, and tangent to this surface.
+
+We work in the static gauge with time coordinate $t$, and call the distance along the string in the snapshots $s$. The velocity of the string would naturally be given by $\partial\mathbf{X}/\partial t$, and we want to remove the component of this velocity along the string's length. Since $s$ is defined to be the distance along the string, the vector $\partial \mathbf{X} / \partial s$ has unit length, and points along the string, so we can find the longitudinal component by simply taking the dot product. Using this, we can find an expression for the transverse velocity,
+\begin{equation}
+\mathbf{v}_\perp = \frac{\partial \mathbf{X}}{\partial t} - \left(\frac{\partial \mathbf{X}}{\partial t}.\frac{\partial \mathbf{X}}{\partial s}\left) \frac{\partial \mathbf{X}}{\partial s}.
+\end{equation}
+
+Now, using equations \ref{foo1}-\ref{foo2}, we reconstruct the string action.
+The argument in the square root becomes
+\begin{eqnarray*}
+(\dot{X}.X')^2 - (\dot{X})^2(X')^2& = &\left(\frac{\partial \mathbf{X}}{\partial t}.\frac{\partial \mathbf{X}}{\partial \sigma}\right)^2 - \left(c^2-\left(\frac{\partial \mathbf{X}}{\partial t}\right)^2\right)\left(\frac{\partial \mathbf{X}}{\partial \sigma}\right)^2 \\
+& = & \left[ c^2 + \left(\frac{\partial \mathbf{X}}{\partial t}.\frac{\partial \mathbf{X}}{\partial s}\right) -\left(\frac{\partial \mathbf{X}}{\partial t}\right)^2\right]\left(\frac{ds}{d\sigma}\right)^2
+\end{eqnarray}
+where for the second line we have used  
+\begin{equation}
+\frac{\partial \mathbf{X}}{\partial \sigma} = \frac{\partial \mathbf{X}}{\partial s} \frac{ds}{d\sigma},
+\end{equation}
+which is a simple application of the chain rule, and the fact that $\partial \mathbf{X}/\partial s$ is a unit vector.
+Now, the second and third terms inside the square bracket turn out to be equal to $v_\perp^2$, as
+\begin{eqnarray*}
+v_\perp^2& =& \left(\frac{\partial \mathbf{X}}{\partial t} - \left(\frac{\partial \mathbf{X}}{\partial t}.\frac{\partial \mathbf{X}}{\partial s}\left) \frac{\partial \mathbf{X}}{\partial s}\right)\left(\frac{\partial \mathbf{X}}{\partial t} - \left(\frac{\partial \mathbf{X}}{\partial t}.\frac{\partial \mathbf{X}}{\partial s}\left) \frac{\partial \mathbf{X}}{\partial s}\right) \\
+& = & \left(\frac{\partial \mathbf{X}}{\partial t}\right)^2 - 2\left(\frac{\partial \mathbf{X}}{\partial t}.\frac{\partial \mathbf{X}}{\partial s}\right)^2 + \left(\frac{\partial \mathbf{X}}{\partial t}.\frac{\partial \mathbf{X}}{\partial s}\right)^2\left(\frac{\partial \mathbf{X}}{\partial s} \right)^2 \\
+& = &  \left(\frac{\partial \mathbf{X}}{\partial t}\right)^2 -\left(\frac{\partial \mathbf{X}}{\partial t}.\frac{\partial \mathbf{X}}{\partial s}\right)^2 \left(2 - \left(\frac{\partial \mathbf{X}}{\partial s} \right)^2\right) \\
+& = &  \left(\frac{\partial \mathbf{X}}{\partial t}\right)^2 -\left(\frac{\partial \mathbf{X}}{\partial t}.\frac{\partial \mathbf{X}}{\partial s}\right)^2. 
+\end{eqnarray}
+This allows us to write the square root as
+\begin{equation}
+c\frac{ds}{d\sigma}\sqrt{1-\frac{v_\perp^2}{c^2}},
+\end{equation}
+and the $c$ outside the square root cancels with the factor of $1/c$ to give
+\begin{equation}
+S = -T_0\int dt \int_0^\pi d\sigma \frac{ds}{d\sigma}\sqrt{1-\frac{v_\perp}{c^2}}.
+\end{equation}
+While we could choose to cancel the $d\sigma$ in this expression, it is useful to keep $\sigma$ around as it has definite bounds. $\sigma$ will always vary between 0 and $\pi$, while the length of the string may be time dependent. However, it is useful to briefly express this in terms of the length parameter, and ignore the time integral in order to find the Lagrangian.
+\begin{equation}
+L = -T_0 \int ds \sqrt{1-\frac{v^2_\perp}{c^2}}
+\end{equation}
+Comparing this to equation \ref{pointlagrangian} we can see a nice comparison. In the point particle case the Lagrangian was the rest energy modified by a relativistic factor, but in this case as well, the total rest energy of the string is given by  
+\begin{equation}
+T_0\int ds,
+\end{equation}
+however in this case the relativistic factor varies along the string. This affirms our choice of action as the natural extension into an additional dimension of the point particle action.
+\subsection{String Endpoint Motion}
+WRITE THIS TOO
+
+\subsection{String Momentum}
+
+In many cases in classical mechanics, the conservation of momentum of free systems allows us to deduce important features of the system dynamics. As such, it would be extremely useful to find some kind of conserved momentum for a freely moving string. We can do this using Lagrangian mechanics method for finding a conserved charge. In this case, the symmetry that generates this charge is invariance under spacetime translations. Recall the Lagrangian density
+\begin{equation}
+\mathcal{L}(\dot{X}, X') = \frac{-T_0}{c}\sqrt{(\dot{X}.X')^2 - (\dot{X})^2(X'^2)},
+\end{equation}
+and note that this has no $X$ dependence, it only depends on its derivatives, so clearly this Lagrangian density has spacetime translation invariance. We can write down an arbitrary translation as a variation as
+\begin{equation}
+\delta X^\mu(\tau, \sigma) = a^\mu,
+\end{equation}
+where $a^\mu$ is the translation. To be fully explicit, we are claiming that if the entire worldsheet is translated in spacetime by a vector $a^\mu$, the Lagrangian density is conserved. To find the conserved current $j_\mu^\alpha$ corresponding to this variation, we use the general equation
+\begin{equation}
+a^\mu j_\mu^\alpha = \frac{\partial \mathcal{L}}{\partial (\partial_\alpha X^\mu)} \delta X_\mu
+\end{equation}
+where $\alpha$ indexes the parameters of the worldsheet (in this case $\sigma, \tau$). In this case, this equation becomes
+\begin{equation}
+a^\mu j_\mu^\alpha = \frac{\partial \mathcal{L}}{\partial (\partial_\alpha X^\mu)} a^\mu.
+\end{equation}
+Cancelling the factors of $a^\mu$, and substituting our parameters in place of the $\alpha$s, this looks more familiar, 
+\begin{equation}
+j^\tau_\mu = \frac{\partial \mathcal{L}}{\partial \dot{X}} = \mathcal{P}_\mu^\tau, \quad j^\sigma_\mu = \frac{\partial \mathcal{L}}{\partial X'} = \mathcal{P}_\mu^\sigma.
+\end{equation}
+Then, the current conservation condition, $\partial_\alpha j_\mu^\alpha = 0$ is simply the string equations of motion \ref{stringeom}
+\begin{equation}\tag{\ref{stringeom}}
+\frac{\partial \mathcal{P}_\mu^\tau}{\partial \tau} + \frac{\partial \mathcal{P}_\mu^\sigma}{\partial \sigma} = 0,
+\end{equation}
+The conseved charge associated with a conserved current is given by the integral over space of the $j_\mu^0$ components, in this case $j_\mu^\tau$.
+\begin{equation}\label{momentumconstanttau}
+p^\mu = \int_0^\pi\mathcal{P}_\mu^\tau(\tau, \sigma)d\sigma,
+\end{equation}
+for fixed values of $\tau$. This is our conserved momentum, 
+\begin{equation}
+\frac{dp_\mu}{d\tau} = 0.
+\end{equation}
+Notice that this is a strong statement, the derivative is with respect to $\tau$, as opposed to some frame's $t$. This means that this quantity is conserved with respect to $\tau$ regardless of the choice of parametrization, as long as lines of constant $\tau$ are spacelike. In particular, back in our static gauge, we do indeed have the property 
+\begin{equation}
+\frac{dp_\mu}{dt} = 0.
+\end{equation}
+
+We can in fact find a slightly more general definition of the momentum $p^\mu$. For any curve $C$ that starts at the $\sigma = 0$ boundary of the worldsheet, and ends at the $\sigma = \pi$ boundary, 
+\begin{equation}\label{generalmomentum}
+p^\mu(C) = \int_C \mathcal{P}_\mu^\tau d\sigma - \int_C \mathcal{P}_\mu^\sigma d\tau.
+\end{equation}
+Then this quantity is the fixed for all choices of $C$. This is presented without proof, although you can see how this collapses into the previous definition \ref{momentumconstanttau} for fixed values of $\tau$, as in that case $d\tau = 0$.
+ 
+We have now obtained the string equations of motion, a conserved momentum, and have a certain amount of intuition gained from using the static gauge. However, any particular solutions of the equations of motion are still far too complicated to comfortably work with. What we need is a new choice of gauge that simplifies the equations of motion so that we can find solutions of the equations of motion that we can try to quantize.
+
+\subsection{Gauge Fixing}
+In section \ref{staticgauge} we chose to associate lines of constant $\tau$ to a single point in time in some Lorentz frame. Motivated by this, we can imagine constructing more general gauges where we associate $\tau$ to linear combinations of spacetime coordinates, and some scaling parameter. We can in fact write this as an equation, 
+\begin{equation}
+\lambda \tau = n_\mu x^\mu. 
+\end{equation} 
+The static gauge is in fact just a special case of this, with $n_\mu = (1, 0, \dots, 0)$. In the process of selecting a gauge we are naturally going to lose Lorentz covariance. By selecting the vector $n_\mu$ we are choosing a preferred direction to fix $\tau$, and no such vector is invariant under all Lorentz transformations. This is fine for now, but is an issue that must be addressed later. By convention, we modify our gauge condition slightly. As the momentum $\p^\mu$ given by equation \ref{generalmomentum} is a conserved vector, the scalar quantity $(p^\mu\,n_\mu)$ is a constant scalar quantity, and we choose to write
+\begin{equation}
+n_\mu X^\mu (\tau, \sigma) = \bar{\lambda}(p^\mu\,n_\mu)\tau.
+\end{equation}
+
+NEED TO WORK OUT WHEN TO DEAL WITH THE REGGE SLOPE AND UNITS IN GENERAL, MAYBE APPENDIX?
+
+Now that we have a $\tau$ parametrization, we need to fix the $\sigma$ parametrization. We can do this by choosing a parametrization such that $n_\mu\mathcal{P}^{\tau \mu}$ is constant over the strings for a given value of $\tau$, i.e.
+\begin{equation}\label{sigmafix}
+n_\mu \mathcal{P}^{\sigma \mu}(\tau, \sigma) = a(\tau).
+\end{equation}
+Actually, it turns out that $a$ can't depend on $\tau$. Integrating both sides of equation \ref{sigmafix} gives 
+\begin{eqnarray*}
+\int_0^\pi n_\mu \mathcal{P}^{\sigma \mu}(\tau, \sigma) d\sigma & = & \int_0^\pi a(\tau) d\sigma\\
+n_\mu\, p^\mu &= &\pi a(\tau),
+\end{eqnarray}
+so
+\begin{equation}\label{ndotp}
+a(\tau) = \frac{n_\mu\,p^\mu}{\pi}, 
+\end{equation}
+and we can see that $a(\tau)$ has no $\tau$ dependence, and in fact its value is already fixed.
+
+We can use this to find an important property of string motion. Taking the scalar product of our equations of motion \ref{stringeom} and our choice of gauge $n_\mu$, we obtain
+\begin{eqnarray*}
+n_\mu\frac{\partial \mathcal{P}^{\tau \mu}}{\partial \tau} + n_\mu\frac{\partial \mathcal{P}^{\sigma \mu}}{\partial \sigma} & = &\\
+\frac{\partial (n_\mu \mathcal{P}^{\tau \mu})}{\partial \tau} + \frac{\partial(n_\mu \mathcal{P}^{\sigma \mu})}{\partial \sigma} & = & 0
+\end{eqnarray}
+The first term here vanishes, as we just proved that $n_\mu \mathcal{P}^{\tau \mu}$ has no $\tau$ dependence. This leaves us with
+\begin{equation}\label{foo3}
+\frac{\partial (n_\mu \mathcal{P}^{\sigma \mu})}{\partial \sigma} = 0. 
+\end{equation}
+For open strings\footnote{For closed strings this is more complicated, as there is no preferred point on the string that we can choose to fix. You achieve the same result, but the derivation is not provided here.}, we can choose to have $n_\mu \mathcal{P}^{\sigma \mu} = 0$ at the string end points, and so equation \ref{foo3} allows us to conclude
+\begin{equation}
+n_\mu \mathcal{P}^{\sigma \mu} = 0.
+\end{equation}
+
+We now have our full parametrization for our arbitary gauge $n_\mu$.
+\begin{equation}\label{ngauge}
+n_\mu \, X^\mu(\tau, \sigma)  =  \frac{2}{T_0 \hbar c} n_\mu  \mathcal{P}^{\tau \mu} \tau 
+\end{equation}
+With this framework in place, we can attempt to construct the equations of motion and constraints in a more palatable way. First, we examine equation \ref{sigmamomentum}, which is the full expression for $\mathcal{P}^\sigma_\mu$. Taking the scalar product of this expression and our $n_\mu$ gives
+\begin{equation}{\label{dirmom}}
+n_\mu \mathcal{P}^{\sigma \mu} = \frac{-T_0}{c} \left(\frac{(\dot{X}_\mu X'^\mu) \frac{\partial (n_\nu X^\mu)}{\partial \tau} - (X')^2\frac{\partial (n_\nu X'^\nu)}{\partial \sigma}}{\sqrt{(\dot{X}.X') - (\dot{X})^2(X')^2}}\right).
+\end{equation}
+Then, using \ref{foo3}, we see that the second term in the numerator vanishes. Similarly, 
+\begin{equation}\label{foo4}
+\frac{\partial (n_\mu \mathcal{P}^{\tau \mu})}{\partial \tau}
+\end{equation}
+is a constant, so in order that equation \ref{dirmom} vanishes, $\dot{X}.X'$ must be equal to $0$. Using this, we can simplify equation \ref{taumomentum}, the expression for $\mathcal{P}^{\tau \mu}$.
+\begin{equation}\label{foo5}
+\mathcal{P}^{\tau \mu} = \frac{T_0}{c}\frac{(X')^2 \dot{X}_\mu}{\sqrt{-(\dot{X})^2(X')^2}}
+\end{equation}
+Then using property \ref{ndotp} of our gauge we find
+\begin{equation}
+1 = \frac{X'^2}{\sqrt{-(\dot{X})^2(X')^2}}
+\end{equation}
+and this can be rearranged into 
+\begin{equation}\label{pluscondition}
+\dot{X}^2 + X'^2 = 0.
+\end{equation}
+Conveniently, this condition, along with the aforementioned property that $\dot{X}.X'=0$ can be combined into the single statement
+\begin{equation}\label{constraint}
+(\dot{X}\pm X')^2 = 0.
+\end{equation}
+This condition is enough to finally put the equations of motion into an understandable form. Picking up from equation \ref{foo5}, we can simplify the square root using \ref{pluscondition}, $\sqrt{-\dot{X}^2 X'^2} = \sqrt{X'^4} = X'^2$, as we have already guaranteed the positivity of the square root. Dividing through by the $X'^2$ from the numerator gives 
+\begin{equation}
+\mathcal{P}^{\tau \mu} = \frac{T_0}{c}\dot{X}^\mu.
+\end{equation}
+Similarly, we can now write
+\begin{equation}
+\mathcal{P}^{\sigma \mu} = \frac{-T_0}{c} X'^\mu.
+\end{equation}
+Recalling the equations of motion \ref{stringeom}, we find that in this parametrization
+\begin{equation}
+\ddot{X}^\mu -X''^\mu = 0
+\end{equation}
+which is a case of the wave equation. The corresponding boundary conditions are
+\begin{equation}
+\left.X'^\mu \right|_{\sigma = 0} = 0, \quad\left. X'^\mu \right|_{\sigma = \pi} = 0. 
+\end{equation}
+
+\subsection{Wave Equation General Solution}
+As the solution of the wave equation is relatively straightforward, we will not discuss it in detail. For a full formal treatment see FIND REFERENCE TEXT FOR PDES, MAYBE APPENDIX?.
+Since the quantity $1/(2\pi T_0 \hbar c)$ appears very frequently, it is useful to abbreviate this to $\alpha'$. This quantity also has a physical significance, that makes it an appropriate choice of constant.
+The full expansion of the general solution is given by
+\begin{equation}
+X^\mu (\tau, \sigma) = x_0^\mu + 2\alpha' p^\mu \tau - i\sqrt{2\alpha'}\sum_{n=0}^\infty \frac{1}{n}\left(\bar{a}_n^\mu e^{in\tau} - a_n^\mu e^{-in\tau}\right) \cos n\sigma,
+\end{equation}
+where the $a_n^\mu$ are constants, and an overbar means complex conjugation.
+
+The terms outside the sum correspond to the centre of mass motion of the string, and the oscillations are described by the sum.
+This expression can in fact be generalised further. Since we are summing two oppositely signed exponentials over the natural numbers, if we choose to define 
+\begin{equation}
+a_{-n}^\mu := \bar{a}_n^\mu
+\end{equation} 
+for positive n, we can rewrite the summation as
+\begin{equation}
+\sum_{n \neq 0} a_n^\mu e^{in\tau}\cos n\sigma
+\end{equation}
+since $\cos$ is an even function.
+If we choose to define
+\begin{equation}\label{pmudefn}
+a_0^\mu := \sqrt{2\alpha'}p^\mu,
+\end{equation}
+then we can write
+\begin{equation}\label{modeexp}
+X^\mu (\tau, \sigma) = x_0^\mu + \sqrt{2\alpha'} a_0^\mu \tau + i\sqrt{2\alpha'}\sum_{n=0}^\infty \frac{1}{n} a_n^\mu e^{-in\tau} \cos n\sigma.
+\end{equation}.
+With this as our expansion, we can calculate the derivatives $\dot{X}^\mu$ and $X'^\mu$.
+\begin{eqnarray}
+\dot{X}^\mu & = &\sqrt{2\alpha'}\sum_{n=-\infty}^\infty a_n^\mu \cos n\sigma\, e^{-in\tau}\label{xdotdefn} \\
+X'^\mu &=& -i\sqrt{2\alpha'}\sum_{n=-\infty}^\infty a_n^\mu \sin n\sigma\, e^{-in\tau}\label{xdashdefn}
+\end{eqnarray}
+Using these we can check that this expansion satisfies our equations of motion and constraints.
+\begin{eqnarray*}
+0 &= &\ddot{X}^\mu -X''^\mu\\
+& = & \sqrt{2\alpha'} \sum_{n=-\infty}^\infty a_n^\mu \cos n\sigma\frac{d}{d\tau}( e^{-in\tau}) - i\sqrt{2\alpha'}\sum_{n=-\infty}^\infty a_n^\mu \frac{d}{d\sigma}(\cos n\sigma)e^{-in\tau}\\
+& =& -i\sqrt{2\alpha'} \sum_{n=-\infty}^\infty n\,a_n^\mu \cos n\sigma \, e^{-in\tau} + i\sqrt{2\alpha'}\sum_{n=-\infty}^\infty n\,a_n^\mu \cos n\sigma \, e^{-in\tau}\\
+& = & 0
+\end{eqnarray}
+ALSO DEMONSTRTATE CONSTRAINT EQUATIONS HOLD
+\section{The Light Cone Gauge}
+In the previous section, the choice of gauge was very general, but here it is useful to specify it very closely. We will choose 
+\begin{equation}
+n^\mu = (1/\sqrt{2},\quad 1/\sqrt{2},\quad 0, \dots, 0).
+\end{equation}
+Notationally, it is also useful to define, for an arbitary vector $V^\mu$, the quantities $V^+$ and $V^-$ 
+\begin{equation}
+V^+ = \frac{V^0 + V^1}{\sqrt{2}}, \quad V^- = \frac{V^0 - V^1}{\sqrt{2}}. 
+\end{equation}
+With these quantities, we can write the spacetime interval, $ds^2$ as
+\begin{equation}
+ds^2 = 2dV^+dV^- - (dV^2) - \dots - (dV^d)^2,
+\end{equation}
+and the Lorentz scalar product of two vectors $V^\mu$, $U^\mu$ is 
+\begin{equation}
+V^\mu_\mu = V^\+ U_\+ + V^\-U_\- - V^2U_2 - \dots - V^dU_d. 
+\end{equation}
+This choice of gauge is called the \emph{Light-cone gauge}. We will use this gauge to show that all of the dynamics is contained within the transverse coordinates, $X^2, \dots, X^d$. We will call these transverse coordinates $X^i$, where $i$ runs from $2$ up to $d$. Thus, the vector $X^\mu$ is written as $(X^+, X^-, \mathbf{X}^i)$  
+Using this notation and our choice of gauge we have 
+\begin{eqnarray}
+X^+(\tau, \sigma) &=& 2\alpha' p^+ \tau\label{xplusdefn} \\
+X^-(\tau, \sigma) &=& 2\alpha' p^- \tau \\
+p^+ & = & \pi \mathcal{P}^{\tau +}\\
+p^- & = & \pi \mathcal{P}^{\tau -}. 
+\end{eqnarray} 
+In this gauge, the constraint equation \ref{constraint} becomes
+\begin{eqnarray*}
+(\dot{X} \pm X')^2& =&
+-2(\dot{X}^+ \pm X'^+)(\dot{X}^- \pm X'^-) + (\dot{\mathbf{X}}^i \pm \mathbf{X}'^i)^2\\ & = & 0 .
+\end{eqnarray}
+Using equation \ref{xplusdefn}, we can see that $\dot{X} = 2\alpha'p^+$ and $X'=0$, so this constraint can be rewritten as
+\begin{equation}
+0 = -4\alpha'p^+(\dot{X}^- \pm X'^-) +  (\dot{\mathbf{X}}^i \pm \mathbf{X}'^i)^2,
+\end{equation}
+or, assuming $p^+ \neq 0$
+\begin{equation}\label{pmderivatives}
+(\dot{X}^- \pm X'^-) = \frac{ (\dot{\mathbf{X}}^i \pm \mathbf{X}'^i)^2}{4\alpha'p^+}.
+\end{equation}
+In the case where $p^+ = 0$, or equivalently $p^0 + p^1 = 0$ (which would mean a massless particle travelling at speed $c$ in the negative $x^1$ direction), the following will not apply, but as this case is so rare it is mostly safe to ignore it.
+
+This pair of equations can be solved for $\dot{X}^-$ and $X'^-$,
+\begin{eqnarray}
+\dot{X}^- &=& \frac{(\dot{\mathbf{X}}^i + \mathbf{X}'^i)^2 + (\dot{\mathbf{X}}^i - \mathbf{X}'^i)^2}{2\alpha'p^+}\\
+&=& \frac{(\dot{\mathbf{X}}^i)^2 + (\mathbf{X}'^i)^2}{\alpha'p^+}\\
+X'^- &=& \frac{(\dot{\mathbf{X}}^i + \mathbf{X}'^i)^2 - (\dot{\mathbf{X}}^i - \mathbf{X}'^i)^2}{2\alpha'p^+}\\
+&=& \frac{2\dot{\mathbf{X}}^i.\mathbf{X}'^i}{\alpha'p^+}.
+\end{eqnarray}
+We are seeking a closed form expression for $X^-$, but given the derivatives, all we need to calculate it is a value of $X^-$ at for some coordinates $\tau_0$, $\sigma_0$, and then an expression for $X^-$ at some other point can be found by
+\begin{eqnarray*}
+X^-(\tau_1, \sigma_1) &=& X^-(\tau_0, \sigma_0) + \int_C dX^-\\
+&=& X^-(\tau_0, \sigma_0) + \int_C \left(\frac{\partial X^-}{\partial \tau} d\tau +  \frac{\partial X^-}{\partial \sigma}d\sigma \right)
+\end{eqnarray}
+where the curve C connects the two points. But we saw from the expressions for $\dot{X}^-$ and $X'^-$ that they only depend on the transverse coordinates $\mathbf{X}^i$, the $+$ component of momentum, and a single value of $X^-$, which we will call $x^-_0$. Noting that our expression for $X^+$, equation \ref{xplusdefn}, also only depends on $p^+$, we see that dynamics of the string only depend on these quantities, 
+\begin{equation}
+\mathbf{X}^i(\tau, \sigma), \quad p^+, \quad x^-_0.
+\end{equation}
+\subsection{Light-Cone Equations of Motion}
+Using our mode expansion of the general solution, equation \ref{modeexp}, the transverse coordinates $X^i$ are given by
+\begin{equation}{imodeexp}
+X^i (\tau, \sigma) = x_0^i + \sqrt{2\alpha'} a_0^i \tau + i\sqrt{2\alpha'}\sum_{n=0}^\infty \frac{1}{n} a_n^i e^{-in\tau} \cos n\sigma.
+\end{equation}
+Also, from equations \ref{xplusdefn} and \ref{pmudefn} we have
+\begin{equation}
+X^+(\tau, \sigma) = 2\alpha'p^+\tau. \label{xplusfoo}
+\end{equation}
+This is in fact the mode expansion for the case where the centre-of-mass position $x^+_0$ and all $X^+$ oscillations vanish.
+
+Finding the $X^-$ coordinates is a little more involved. $X^-$ is a linear combination of $X^0$ and $X^1$, which are both solutions of the equations of motion, so $X^-$ is also a solution of the equations of motion, so we can still use the mode expansion \ref{modeexp}. $x_0^-$ is one of the dynamical components, so that term of the expansion can be left untouched. As such what we are really seeking is expressions for the minus oscillators, $\alpha_n^-$. 
+
+Now note that we can use the derivatives that we calculated in equations \ref{xdotdefn} and \ref{xdashdefn} to write
+\begin{equation}\label{sumderivatives}
+\dot{X}^\mu + \dash{X}^\mu = \sqrt{2\alpha'}\sum_{n \in \mathbb{Z}}\alpha_n^\mu e^{-in(\tau \pm \sigma)},
+\end{equation}
+since $\cos \theta + i \sin \theta = e^{i\sin\theta}$. In particular the minus $X^-$ derivatives satisfy this, and using equation \ref{pmderivatives} we have
+\begin{eqnarray*}\label{foo6}
+\sqrt{2\alpha'}\sum_{n \in \mathbb{Z}}\alpha_n^- e^{-in(\tau \pm \sigma)} &=& \dot{X}^- + \dash{X}^-\\
+&=& \frac{(\mathbf{X}^i \pm \mathbf{X}'^i)^2}{4\alpha'p^+}.
+\end{eqnarray}
+equation \ref{sumderivatives} also holds for the $\mathbf{X}^i$ derivatives, so 
+\begin{equation}
+\dot{X}^i + \dash{X}^i = \sqrt{2\alpha'}\sum_{n \in \mathbb{Z}}\alpha_n^i e^{-in(\tau \pm \sigma)},
+\end{equation}
+allowing us to continue \ref{foo6}
+\begin{eqnarray*}
+&=& \frac{1}{2p^+}\left(\sum_{a \in \mathbb{Z}}\alpha_a^i e^{-ia(\tau \pm \sigma)}\right)\left(\sum_{b \in \mathbb{Z}}\alpha_b^i e^{-ib(\tau \pm \sigma)}\right)\\
+&=& \frac{1}{2p^+}\sum_{a \in \mathbb{Z}}\sum_{b \in \mathbb{Z}}\alpha_a^i\alpha_b^ie^{-i(a+b)(\tau \pm \sigma)}.
+\end{eqnarray}
+Now, setting $n=(a+b)$ we can shift one of the sums to get
+\begin{equation}
+= \frac{1}{2p^+}\sum_{n \in \mathbb{Z}}\sum_{a \in \mathbb{Z}}\alpha_a^i\alpha_{n-a}^ie^{-in(\tau \pm \sigma)}.
+\end{equation}
+Convenient addition of brackets gives us our result,
+\begin{eqnarray}
+\sqrt{2\alpha'}\sum_{n \in \mathbb{Z}} \alpha^-_n e^{in(\tau \pm \sigma)} &=& \frac{1}{2p^+}\sum_{n \in \mathbb{Z}}\left(\sum_{a \in \mathbb{Z}} \alpha_a^i\alpha_{n-a}^i\right)e^{in(\tau \pm \sigma)}\\
+\alpha^-_n&=& \frac{1}{2p^+\sqrt{2\alpha'}}\sum_{a \in \mathbb{Z}}\alpha_{n-a}\alpha_a\label{minusoscillators}.
+\end{eqnarray}
+Finally, we have a complete explicit solution for the equations of motion in the light-cone gauge.
+\begin{eqnarray}
+X^+(\tau, \sigma) &=& 2\alpha'p^+ \tau \tag{xplusfoo}\\
+X^-(\tau, \sigma) &=& x_0^- + \sqrt{2\alpha'} a_0^- \tau + i\sqrt{2\alpha'}\sum_{n=0}^\infty \frac{1}{n} a_n^- e^{-in\tau} \cos n\sigma\tag{\modeexp}\\
+X^i (\tau, \sigma) &=& x_0^i + \sqrt{2\alpha'} a_0^i \tau + i\sqrt{2\alpha'}\sum_{n=0}^\infty \frac{1}{n} a_n^i e^{-in\tau} \cos n\sigma\tag{imodeexp}\\
+\text{where} \,\, \alpha^-_n&=& \frac{1}{2p^+\sqrt{2\alpha'}}\sum_{a \in \mathbb{Z}}\alpha_{n-a}\alpha_a\tag{minusoscillators}.
+\end{eqnarray}
+THE TAGGING FOR REFERENCING BACK PAST FORMULAE ISNT WORKING, NOT NECESSARY TO FIX, BUT MIGHT WANT TO.
+
+With these four expressions, a possible motion can be found by choosing arbitrary values for $p^+, x_0^-$, and fixing $X^i$ by choosing values for $x_0^i$ and $\alpha_n^i$ for all $n \in \mathbb{Z}$ and for all $2\leq i\leq d$.
+\section{Quantizing the Relativistic Point Particle}
+\subsection{Point Particle Equations of Motion in the Light-Cone Gauge}
+Back in section \ref{sectionpoint} we found a Lorentz covariant action for a point particle, and then used it to find the equations of motion. We found that the action was proportional to the proper length along the string, and parametrizing the world line by proper time gave us the expression
+\begin{equation}
+S = -mc\int_{\tau_i}^{\tau_f} \sqrt{-\eta_{\mu \nu} \frac{dx^\mu}{d\tau} \frac{dx^\nu}{d\tau}}d\tau,
+\end{equation}
+which led to the equations of motion
+\begin{equation}
+\frac{dp_\mu}{d\tau} = 0,
+\end{equation}
+where
+\begin{equation}
+p_\mu := \frac{\partial L}{\partial \dot{x}^\mu} = \frac{m\dot{x}_\mu}{-\dot{x}_\mu\dot{x}^\mu}.
+\end{equation}
+The corresponding constraint equation is
+\begin{equation}\label{constraintpoint}
+p^2 + m^2 = 0.
+\end{equation}
+We choose to use the light cone gauge, i.e. set the $x^+$ coordinate proportional to $\tau$. As with our choice of gauge for the string, we choose to have a factor of $p^+$ im the definition, and in order to correct the units we divide by $m^2$,
+\begin{equation}\label{pointeom1}
+x^+ := \frac{1}{m^2}p^+\tau.
+\end{equation}
+Using the + component of this, and substituting it into our definition of $p^\mu$ and cancelling the $p^+$ gives
+\begin{eqnarray}
+p^+ &=& \frac{m\dot{x}^+}{\sqrt{-x^\mu x_\mu}} = \frac{p^+}{m\sqrt{-x^\mu x_\mu}}\\
+1 &=& \frac{1}{m\sqrt{x^\mu x_\mu}} \\
+x^\mu x_\mu &=& -\frac{1}{m^2}.
+\end{eqnarray}
+Thus
+\begin{equation}\label{pmudefn}
+p_\mu = m^2 \dot{x}_\mu,
+\end{equation}
+and our equations of motion become
+\begin{equation}
+m^2\ddot{x}_\mu = 0.
+\end{equation}
+In the case of the particle, it is very easy to construct $p^-$ from $p^+$ and the transverse components. If we use our expression for the spacetime interval in light cone coordinates in equation \ref{constraintpoint}, we get
+\begin{eqnarray}\label{pminusdefn}
+p^2 + m^2 &=& -2p^+ p_- + p^i p_i + m^2 = 0\\
+p_- &=& \frac{p^i p_i + m^2}{2p^+}.
+\end{eqnarray}
+Using equation \ref{pmudefn} and integrating gives
+\begin{eqnarray*}\label{pointeom2}
+\dot{x}^- &=& \frac{1}{m^2} p^- \\
+x^-(\tau) &=& \frac{1}{m^2}\int p^-d\tau\\ 
+&=& x_0^- + \frac{p^-}{m^2}\tau\\
+&=& x_0^- + \frac{p^i p_i + m^2}{2p^+m^2}
+\end{eqnarray}
+Similarly, 
+\begin{equation}\label{pointeom3}
+x^i(\tau) = x_0^i + \frac{p^-}{m^2}\tau.
+\end{equation}
+Together, equations \ref{pointeom1}, \ref{pointeom2} and \ref{pointeom3} give a complete set of equations for the motion of the point particle. From the right hand sides of these equations, we can see that the dynamically significant variables are, like in the case of the string,
+\begin{equation}
+p^+, \quad x_0^-, \quad x^i, \quad p^i.
+\end{equation}
+For the string we needed a full set of $\alpha_n^i$, but for a point particle you don't have the oscilliatory motion, so it is only the values of $p^i$ that we need.
+\subsection{Point Particle Quantum Operators}
+Following Dirac quantisation, we choose Heisenberg  operators corresponding to each of our dynamical variables,
+\begin{equation}
+\hat{p}^+(\tau), \quad \hat{x}_0^-(\tau),\quad \hat{x}^i(\tau), \quad \hat{p}^i\(\tau),
+\end{equation} 
+with canonical commutation relations (CCR)
+\begin{equation}
+[\hat{x}_0^-(\tau),\hat{p}^+(\tau)] &= i\eta^{- +} &= -i,\quad\quad 
+[\hat{x}^i(\tau),\hat{p}^j(\tau)] &= i\eta^{i j} &= -i\delta^{i j}.
+\end{equation}
+All other commutators between these variables vanish.
+
+We can use our definitions of the other, non dynamically significant variables to find their corresponding quantum operator equivalents as well. From equation \ref{pointeom1} we have
+\begin{equation}
+\hat{x}^+(\tau) = \frac{1}{m^2}\hat{p}^+\tau.
+\end{equation}
+For $x^-$, it is useful to revert to the intermediary operator $p^-$
+\begin{equation}
+\hat{p}^- = \frac{\hat{p}^i\hat{p}_i + m^2}{2\hat{p}^+}.
+\end{equation}
+Then, using this, we can write the comparatively simple expresion for $x^-$
+\begin{equation}\label{xplusheis}
+\hat{x}^-(\tau) = \hat{x}_0^- + \frac{p^-}{m^2}\tau. 
+\end{equation}
+In order to find the commutation relations between these dependent operators, we substitue the CCR in their definitions. For example
+\begin{eqnarray*}
+[\hat{x}^+(\tau),\,\hat{x}^-(\tau)] &=& \left[\frac{\hat{p}^+}{m^2}\tau,\, \hat{x}_0^- + \frac{\hat{p}^i\hat{p}_i+m^2}{2\hat{p}^+m^2}\tau\right]\\
+&=& \frac{1}{m^2}\left([\hat{p}^+\tau,\,\hat{x}^-_0] + \left[\hat{p}^+\tau,\, \frac{\hat{p}^i\hat{p}_i+m^2}{2\hat{p}^+m^2}\tau\right]\right)\\
+&=& \frac{1}{m^2}\left(i\tau + 0\right)\\
+&=& \frac{i\tau}{m^2}.
+
+\end{eqnarray} 
+\subsection{Point Particle Hamiltonian}
+The Hamiltonian of any quantum system is an operator that governs time evolution. In normal coordinates, this means that it is generated by $p^0$, the energy component of the momentum Lorentz vector. Since we are working in light-cone coordinates however, we will instead use light-cone energy ($p^-$) and light cone time ($x^-$)\footnote{We could equivalently choose $x^-$ to be the light cone time and $p^+$ the light cone energy. For a more thorough explanation of this, see REFERENCE ZWEIBACH.}. In these coordinates, light cone energy governs light cone time evolution, i.e.
+\begin{equation}
+\frac{\partial}{\partial x^+} \twiddle p^-.
+\end{equation}
+FIND THE CORRECT LATEX COMMAND FOR TWIDDLE
+In order to find an operator that governs $\tau$ evolution, we use equation \ref{xplusheis} and rearrange to get
+\begin{equation}
+\tau = \frac{m^2\hat{x}^+}{\hat{p}^+}, 
+\end{equation}
+so we have that
+\begin{equation}
+\frac{\partial}{\partial \tau} \twiddle \frac{\hat{p}^+}{m^2}\hat{p}^-.
+\end{equation}
+This becomes our Heisenberg picture Hamiltonian,
+\begin{eqnarray*}
+\hat{H}(\tau) &=& \frac{\hat{p}^+(\tau)}{m^2}\hat{p}^-(\tau)\\
+&=& \frac{\hat{p}^i(\tau)\hat{p}_i(\tau)+ m^2}{2m^2}.
+\end{eqnarray}
+When working in the Heisenberg picture, the time evolution of an arbitrary operator $\hat{A}(\tau)$ is given by
+\begin{equation}
+\frac{d\hat{A}(\tau)}{d\tau} = -i[\hat{A}(\tau), H(\tau)].
+\end{equation}
+We can use this to analyze the dynamics of our dynamically significant variables, and check that they evolve as expected using this Hamiltonian.
+
+Demonstrating the conservation of $\hat{p}^+$, $\hat{x}_0^-$ and $\hat{p}^i$ is simple. Note that the Hamiltonian only depends on the transverse $\hat{p}^i$ operators, and by the CCR, $[\hat{p}^+, \hat{p}^i] = [\hat{p}^i,\hat{p}^j] = [\hat{x}_0^-,\hat{p}^i] = 0$. All operators commute with constants so the $m^2$ terms vanish as well. Explicitly for $\hat{p}^+$,
+\begin{eqnarray*}
+\frac{d \hat{p}^+(\tau)}{d\tau} &=& -i[\hat{p}^+(\tau),\hat{H}(\tau)]\\
+&=& -i\left[\hat{p}^+(\tau),\frac{\hat{p}^i(\tau)\hat{p}_i(\tau) + m^2}{2m^2}\right]\\
+&=& -\frac{i}{2m^2}\left[\hat{p}^+(\tau),\hat{p}^i(\tau)\hat{p}_i(\tau) \right]\\
+&=& 0.
+\end{eqnarray}
+The same argument holds for $\hat{x}_0^-$ and $\hat{p}^i$.
+
+For $\hat{x}^i$ the manipulations are a little more involved.
+\begin{eqnarray*}
+\frac{d\hat{x}^i(\tau)}{d\tau} &=& -i\left[\hat{x}^i(\tau),\hat{H}(\tau)\right]\\ 
+&=& -i\left[\hat{x}^i(\tau), \frac{\hat{p}^j(\tau)\hat{p}_j(\tau) + m^2}{2m^2}\right]\\
+&=& -\frac{i}{2m^2}\left[\hat{x}^i(\tau),\eta_{k j}\hat{p}^k(\tau)\hat{p}^j(\tau)\right]\\
+&=& -\frac{i\eta_{k j}}{2m^2}\left(\left[\hat{x}^i(\tau),\hat{p}^k(\tau)\right]\hat{p}^j(\tau) + \hat{p}^k(\tau)\left[\hat{x}^i(\tau),\hat{p}^j(\tau)\right]\right)\\
+&=& -\frac{i}{2m^2}\left(i\eta_{k j}\eta^{i k}\hat{p}^j(\tau) + i\eta_{k j}\hat{p}^j(\tau)\eta^{i j}\right)\\
+&=& \frac{1}{2m^2}(\hat{p}^i(\tau) + \hat{p}^i(\tau))\\
+&=& \frac{\hat{p}^i(\tau)}{m^2}
+\end{eqnarray}
+In the fourth equality, we have used the standard result of commutators that for operators $\hat{A}$, $\hat{B}$ and $\hat{C}$, $[\hat{A}\hat{B},\hat{C}]= [\hat{A},\hat{C}]\hat{B} + \hat{A}[\hat{B},\hat{C}]$. 
+This result fits naturally with our conventional ideas of momentum, as integrating gives the equations of motion
+\begin{equation}
+\hat{x}^i(\tau) = \hat{x}^i_0 + \frac{\hat{p}^i}{m^2}\tau,
+\end{equation}
+where $\hat{x}^i_0$ are constant operators of integration. Note that even in the Heisenberg picture, as $\hat{p}^i$, $\hat{x}_0^-$ and $\hat{p}^+$ are time independent, and $\hat{x}^i$ depend linearly on $\tau$ we can write
+\begin{eqnarray}
+\hat{p}^+(\tau) &=& \hat{p}^+\\
+\hat{x}_0^-(\tau) &=& \hat{x_0^-}\\
+\hat{x}^i(\tau) &=& \hat{x}_0^i + \frac{\hat{p}^i}{m^2}\tau\\
+\hat{p}^i(\tau) &=& \hat{p}^i,
+\end{eqnarray}
+with all the operators on the right hand side being constant operators.
+From here, we could easily derive the time evolution of our other, dependent operators, $\hat{x}^+$, $\hat{x}^-$ and $\hat{p}^-$, to see that the Hamiltonian works as desired. These results are omitted for brevity.
+\subsection{Quantum Point Particle States}
+To define the Hilbert space that our states will live in, we choose a set of commuting operators with as great a span as possible. Since the commutation requirement means we can only have one out of $\hat{p}^i$ and $\hat{x}^i$ for each $i$, and only one out of $\hat{x}_0^-$ and $\hat{p}^+$, we choose (for uniformity) to use the operators $p^+$ and the set of $p^i$. Thus, we write a state with eigenvalue $p^+$ for the $\hat{p}^+$ operator, and a vector of eigenvalues $\mathbf{p}^i$ for the set of $\hat{p}^i$ operators as
+\begin{equation}
+\bra{p^+, \mathbf{p}^i}
+\end{equation}
+\appendix
+\section{First Appendix\label{a1}}
+
+
+% The following produces the References section. It should appear at the very end
+% of your document.
+
+\begin{thebibliography}{99}
+
+%\bibitem{spread}
+%A spreadsheet with my data, \url{https://maths.york.ac.uk/moodle/mod/resource/view.php?id=33542}
+
+\end{thebibliography}
+
+\end{document}

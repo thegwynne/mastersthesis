@@ -1,0 +1,15 @@
+\begin{titlepage}
+\begin{center}
+\begin{figure}
+\includegraphics[width=0.8\textwidth]{york_logo}
+\end{figure}
+\textsc{\Large Final year project}\\[0.5cm]
+
+% Title
+\HRule \\[0.4cm]
+{ \huge \bfseries The Very Hungry Caterpillar \\[0.4cm] }
+
+\HRule \\[1.5cm]
+\author{Eric Carl}
+\end{center}
+\end{titlepage}
